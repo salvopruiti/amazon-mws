@@ -1,7 +1,5 @@
 <?php 
-namespace Pruiti\AmazonMWS;
-
-use Exception;
+namespace Pruiti\AmazonMWS\Models;
 
 class Product {
 

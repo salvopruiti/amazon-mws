@@ -3,8 +3,6 @@ namespace Pruiti\AmazonMWS;
 
 use DateTime;
 use Exception;
-use DateTimeZone;
-use Pruiti\AmazonMWS\EndPoint;
 use League\Csv\Reader;
 use League\Csv\Writer;
 use Pruiti\AmazonMWS\Models\FeesEstimateRequestElement;
@@ -104,12 +102,10 @@ class Client
         try {
             $this->ListOrderItems('validate');
         } catch (Exception $e) {
-            if ($e->getMessage() == 'Invalid AmazonOrderId: validate') {
+            if ($e->getMessage() == 'Invalid AmazonOrderId: validate')
                 return true;
-            } else {
-                return false;
-            }
         }
+        return false;
     }
 
     /**
