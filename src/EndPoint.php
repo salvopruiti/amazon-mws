@@ -1,9 +1,9 @@
 <?php
-namespace MCS;
+namespace Pruiti\AmazonMWS;
 
 use Exception;
 
-class MWSEndPoint{
+class EndPoint {
 
     public static $endpoints = [
         'ListRecommendations' => [

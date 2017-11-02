@@ -1,18 +1,18 @@
 <?php
-namespace MCS;
+namespace Pruiti\AmazonMWS;
 
 use DateTime;
 use Exception;
 use DateTimeZone;
-use MCS\MWSEndPoint;
+use Pruiti\AmazonMWS\EndPoint;
 use League\Csv\Reader;
 use League\Csv\Writer;
 use SplTempFileObject;
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\BadResponseException;
 use Spatie\ArrayToXml\ArrayToXml;
 
-class MWSClient{
+class Client {
 
     const SIGNATURE_METHOD = 'HmacSHA256';
     const SIGNATURE_VERSION = '2';
@@ -971,7 +971,7 @@ class MWSClient{
     private function request($endPoint, array $query = [], $body = null, $raw = false)
     {
 
-        $endPoint = MWSEndPoint::get($endPoint);
+        $endPoint = EndPoint::get($endPoint);
 
         $merge = [
             'Timestamp' => gmdate(self::DATE_FORMAT, time()),
@@ -1044,7 +1044,7 @@ class MWSClient{
 
             $requestOptions['query'] = $query;
 
-            $client = new Client();
+            $client = new HttpClient();
 
             $response = $client->request(
                 $endPoint['method'],

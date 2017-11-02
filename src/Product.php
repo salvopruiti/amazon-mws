@@ -1,9 +1,9 @@
 <?php 
-namespace MCS;
+namespace Pruiti\AmazonMWS;
 
 use Exception;
 
-class MWSProduct{
+class Product {
 
     public $sku;
     public $price;
@@ -12,6 +12,8 @@ class MWSProduct{
     public $product_id_type;
     public $condition_type = 'New';
     public $condition_note;
+    public $add_delete = "a";
+    public $handling_time;
     
     private $validation_errors = [];
     
@@ -42,6 +44,8 @@ class MWSProduct{
             'product_id_type' => $this->product_id_type,
             'condition_type' => $this->condition_type,
             'condition_note' => $this->condition_note,
+            'add_delete' => $this->add_delete,
+            'handling_time' => $this->handling_time,
         ];
     }
     
