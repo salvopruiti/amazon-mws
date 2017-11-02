@@ -3,8 +3,8 @@ namespace Pruiti\AmazonMWS\Models;
 
 class MoneyType {
 
-    public $Amount;
-    public $CurrencyCode;
+    public $Amount = 0;
+    public $CurrencyCode = 'EUR';
 
     private $validation_errors = [];
 

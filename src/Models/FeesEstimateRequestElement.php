@@ -9,7 +9,7 @@ class FeesEstimateRequestElement {
     /** @var  PriceToEstimateFees */
     public $PriceToEstimateFees;
     public $Identifier;
-    public $IsAmazonFulfilled;
+    public $IsAmazonFulfilled = false;
 
     private $validation_errors = [];
 

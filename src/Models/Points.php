@@ -3,7 +3,7 @@ namespace Pruiti\AmazonMWS\Models;
 
 class Points {
 
-    public $PointsNumber;
+    public $PointsNumber = 0;
 
     private $validation_errors = [];
 
