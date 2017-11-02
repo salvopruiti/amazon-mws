@@ -75,6 +75,17 @@ class Client
 
     }
 
+    public function setMarketplaceId($id)
+    {
+        if (!isset($this->MarketplaceIds[$this->config['Marketplace_Id']])) {
+            throw new Exception('Invalid Marketplace Id');
+        }
+
+        $this->config['Marketplace_Id'] = $id;
+
+        return $this;
+    }
+
     /**
      * Call this method to get the raw feed instead of sending it
      */
