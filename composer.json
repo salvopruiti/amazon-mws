@@ -23,7 +23,7 @@
     "require-dev": {},
     "autoload": {
         "psr-4": {
-            "MCS\\": "src"
+            "Pruiti\\AmazonMWS\\": "src"
         }
     }
 }
