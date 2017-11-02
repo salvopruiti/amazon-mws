@@ -7,6 +7,7 @@ use DateTimeZone;
 use Pruiti\AmazonMWS\EndPoint;
 use League\Csv\Reader;
 use League\Csv\Writer;
+use Pruiti\AmazonMWS\Models\FeesEstimateRequestElement;
 use SplTempFileObject;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\BadResponseException;
@@ -174,6 +175,39 @@ class Client
 
         return $this->request(
             'GetLowestPricedOffersForASIN',
+            $query
+        );
+
+    }
+
+    /**
+     * @param array|FeesEstimateRequestElement|FeesEstimateRequestElement[] $products
+     * @return mixed
+     */
+    public function getMyFeesEstimate($products)
+    {
+        $query = [];
+        $counter = 1;
+        if(!is_array($products)) $products = [$products];
+
+        foreach ($products as $product) {
+
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.MarketplaceId"] = $product->MarketplaceId;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.IdType"] = $product->IdType;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.IdValue"] = $product->IdValue;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.IsAmazonFulfilled"] = $product->IsAmazonFulfilled;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.Identifier"] = $product->Identifier;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.PriceToEstimateFees.ListingPrice.CurrencyCode"]= $product->PriceToEstimateFees->ListingPrice->CurrencyCode;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.PriceToEstimateFees.ListingPrice.Amount"]= $product->PriceToEstimateFees->ListingPrice->Amount;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.PriceToEstimateFees.Shipping.CurrencyCode"]= $product->PriceToEstimateFees->Shipping->CurrencyCode;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.PriceToEstimateFees.Shipping.Amount"]= $product->PriceToEstimateFees->Shipping->Amount;
+            $query["FeesEstimateRequestList.FeesEstimateRequest.$counter.PriceToEstimateFees.Points.PointsNumber"]= $product->PriceToEstimateFees->Points->PointsNumber;
+
+            $counter++;
+        }
+
+        return $this->request(
+            'GetMyFeesEstimate',
             $query
         );
 
@@ -999,6 +1033,7 @@ class Client
      * @param null $body
      * @param bool $raw
      * @throws Exception
+     * @return mixed
      */
     private function request($endPoint, array $query = [], $body = null, $raw = false)
     {
@@ -1027,6 +1062,10 @@ class Client
         }
 
         if (isset($query['MarketplaceId'])) {
+            unset($query['MarketplaceId.Id.1']);
+        }
+
+        if (isset($query['FeesEstimateRequestList.FeesEstimateRequest.1.MarketplaceId'])) {
             unset($query['MarketplaceId.Id.1']);
         }
 
@@ -1076,7 +1115,9 @@ class Client
 
             $requestOptions['query'] = $query;
 
-            $client = new HttpClient();
+            $client = new HttpClient(['verify' => false]);
+
+            print_r($requestOptions);
 
             $response = $client->request(
                 $endPoint['method'],

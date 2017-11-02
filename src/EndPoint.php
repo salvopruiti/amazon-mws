@@ -127,6 +127,12 @@ class EndPoint {
             'action' => 'GetLowestPricedOffersForASIN',
             'path' => '/Products/2011-10-01',
             'date' => '2011-10-01'
+        ],
+        'GetMyFeesEstimate' => [
+            'method' => 'POST',
+            'action' => 'GetMyFeesEstimate',
+            'path' => '/Products/2011-10-01',
+            'date' => '2011-10-01'
         ]
     ];
 
