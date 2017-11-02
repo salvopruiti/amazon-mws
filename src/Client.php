@@ -1117,8 +1117,6 @@ class Client
 
             $client = new HttpClient(['verify' => false]);
 
-            print_r($requestOptions);
-
             $response = $client->request(
                 $endPoint['method'],
                 $this->config['Region_Url'] . $endPoint['path'],
