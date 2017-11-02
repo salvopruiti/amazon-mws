@@ -5,6 +5,10 @@ use Exception;
 
 class Product {
 
+    const ADDMODE_ADD_UPDATE = 'a';
+    const ADDMODE_DELETE = 'd';
+    const ADDMODE_REMOVE = 'x';
+
     public $sku;
     public $price;
     public $quantity = 0;
@@ -106,7 +110,13 @@ class Product {
                 $this->validation_errors['condition_note'] = 'Should not exceed 1000 characters';                    
             }
         }
-        
+
+        if($this->handling_time && !is_numeric($this->handling_time))
+            $this->validation_errors['handling_time'] = 'Handling Time must be a number';
+
+        if ($this->add_delete && !in_array($this->add_delete, ['a','d','x']))
+            $this->validation_errors['add_delete'] = 'Invalid Add Mode. Valids: a => update/add, d => delete offer, x => remove product';
+
         if (count($this->validation_errors) > 0) {
             return false;    
         } else {
