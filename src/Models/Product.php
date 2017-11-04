@@ -16,6 +16,9 @@ class Product {
     public $condition_note;
     public $add_delete = "a";
     public $handling_time;
+    public $brand;
+    public $manufacturer;
+    public $item_name;
     
     private $validation_errors = [];
     
@@ -48,6 +51,9 @@ class Product {
             'condition_note' => $this->condition_note,
             'add_delete' => $this->add_delete,
             'handling_time' => $this->handling_time,
+            'brand' => $this->brand,
+            'manufacturer' => $this->manufacturer,
+            'item_name' => $this->item_name,
         ];
     }
     
