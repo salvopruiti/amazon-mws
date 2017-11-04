@@ -122,9 +122,14 @@ class Product {
         }
     }
     
-    public function __set($property, $value) {
+    public function __get($property) {
         if (property_exists($this, $property)) {
             return $this->$property;
         }
-    }    
+        return null;
+    }
+
+    public function __set($property, $value) {
+        $this->$property = $value;
+    }
 }
