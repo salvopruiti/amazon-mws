@@ -883,10 +883,20 @@ class Client
 
     public function cancelFeedSubmissions($feedSubmissionIds = null)
     {
-        if(!is_array($feedSubmissionIds)) $feedSubmissionIds = [$feedSubmissionIds];
-        $result = $this->request('CancelFeedSubmissions', [
-            'FeedSubmissionIdList' => $feedSubmissionIds
-        ]);
+        if($feedSubmissionIds) {
+            if (!is_array($feedSubmissionIds)) $feedSubmissionIds = [$feedSubmissionIds];
+
+            $query = [];
+            $counter = 1;
+            foreach ($feedSubmissionIds as $value) {
+                $query['FeedSubmissionIdList.Id.' . $counter] = $value;
+                $counter = $counter + 1;
+            }
+
+
+        }
+
+        $result = $this->request('CancelFeedSubmissions', $query);
 
         if (isset($result['CancelFeedSubmissionsResult'])) {
             return $result['CancelFeedSubmissionsResult'];
