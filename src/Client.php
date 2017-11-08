@@ -6,6 +6,7 @@ use Exception;
 use League\Csv\Reader;
 use League\Csv\Writer;
 use Pruiti\AmazonMWS\Models\FeesEstimateRequestElement;
+use Pruiti\AmazonMWS\Models\Product;
 use SplTempFileObject;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\BadResponseException;
@@ -797,10 +798,12 @@ class Client
 
     /**
      * Post to create or update a product (_POST_FLAT_FILE_LISTINGS_DATA_)
-     * @param  object $MWSProduct or array of MWSProduct objects
+     * @param  Product|Product[]|array $MWSProduct or array of MWSProduct objects
+     * @param  array $options
+     * @param  boolean $debug
      * @return array
      */
-    public function postProduct($MWSProduct)
+    public function postProduct($MWSProduct, $options = [], $debug = false)
     {
 
         if (!is_array($MWSProduct)) {
@@ -832,7 +835,7 @@ class Client
             );
         }
 
-        return $this->SubmitFeed('_POST_FLAT_FILE_LISTINGS_DATA_', $csv);
+        return $this->SubmitFeed('_POST_FLAT_FILE_LISTINGS_DATA_', $csv, $options, $debug);
 
     }
 
