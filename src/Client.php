@@ -858,10 +858,11 @@ class Client
      * Uploads a feed for processing by Amazon MWS.
      * @param string $FeedType (http://docs.developer.amazonservices.com/en_US/feeds/Feeds_FeedType.html)
      * @param mixed $feedContent Array will be converted to xml using https://github.com/spatie/array-to-xml. Strings will not be modified.
+     * @param array $options
      * @param boolean $debug Return the generated xml and don't send it to amazon
      * @return array
      */
-    public function submitFeed($FeedType, $feedContent, $debug = false)
+    public function submitFeed($FeedType, $feedContent, $options = [], $debug = false)
     {
 
         if (is_array($feedContent)) {
@@ -882,13 +883,13 @@ class Client
             return $feedContent;
         }
 
-        $query = [
+        $query = array_merge([
             'FeedType' => $FeedType,
             'PurgeAndReplace' => 'false',
             'Merchant' => $this->config['Seller_Id'],
             'MarketplaceId.Id.1' => false,
             'SellerId' => false,
-        ];
+        ], $options);
 
         //if ($FeedType === '_POST_PRODUCT_PRICING_DATA_') {
         $query['MarketplaceIdList.Id.1'] = $this->config['Marketplace_Id'];
