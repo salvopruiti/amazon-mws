@@ -857,6 +857,44 @@ class Client
         }
     }
 
+    public function getFeedSubmissionList()
+    {
+        $result = $this->request('GetFeedSubmissionList', []);
+
+        if (isset($result['GetFeedSubmissionListResult'])) {
+            return $result['GetFeedSubmissionListResult'];
+        } else {
+            return $result;
+        }
+    }
+
+    public function getFeedSubmissionListByNextToken($nextToken)
+    {
+        $result = $this->request('GetFeedSubmissionListByNextToken', [
+            'NextToken' => $nextToken
+        ]);
+
+        if (isset($result['GetFeedSubmissionListByNextTokenResult'])) {
+            return $result['GetFeedSubmissionListByNextTokenResult'];
+        } else {
+            return $result;
+        }
+    }
+
+    public function cancelFeedSubmissions($feedSubmissionIds = null)
+    {
+        if(!is_array($feedSubmissionIds)) $feedSubmissionIds = [$feedSubmissionIds];
+        $result = $this->request('CancelFeedSubmissions', [
+            'FeedSubmissionIdList' => $feedSubmissionIds
+        ]);
+
+        if (isset($result['CancelFeedSubmissionsResult'])) {
+            return $result['CancelFeedSubmissionsResult'];
+        } else {
+            return $result;
+        }
+    }
+
     /**
      * Uploads a feed for processing by Amazon MWS.
      * @param string $FeedType (http://docs.developer.amazonservices.com/en_US/feeds/Feeds_FeedType.html)

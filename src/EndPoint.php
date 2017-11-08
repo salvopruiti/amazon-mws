@@ -42,6 +42,26 @@ class EndPoint {
             'path' => '/Products/2011-10-01',
             'date' => '2011-10-01'
         ],
+        'GetFeedSubmissionList' => [
+            'method' => 'POST',
+            'action' => 'GetFeedSubmissionList',
+            'path' => '/Feeds/2009-01-01',
+            'date' => '2009-01-01'
+        ],
+
+        'CancelFeedSubmissions' => [
+            'method' => 'POST',
+            'action' => 'CancelFeedSubmissions',
+            'path' => '/Feeds/2009-01-01',
+            'date' => '2009-01-01'
+        ],
+
+        'GetFeedSubmissionListByNextToken' => [
+            'method' => 'POST',
+            'action' => 'GetFeedSubmissionListByNextToken',
+            'path' => '/Feeds/2009-01-01',
+            'date' => '2009-01-01'
+        ],
         'GetFeedSubmissionResult' => [
             'method' => 'POST',
             'action' => 'GetFeedSubmissionResult',
