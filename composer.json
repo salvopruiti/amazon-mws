@@ -1,5 +1,5 @@
 {
-    "name": "salvopruiti/amazon-mws",
+    "name": "salvo-pruiti/amazon-mws",
     "description": "Library to interface with Amazon MWS",
     "license": "MIT",
     "keywords": ["amazon", "mws"],
@@ -23,7 +23,7 @@
     "require-dev": {},
     "autoload": {
         "psr-4": {
-            "Pruiti\\AmazonMWS\\": "src"
+            "SalvatorePruiti\\AmazonMWS\\": "src"
         }
     }
 }
