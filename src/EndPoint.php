@@ -1,5 +1,5 @@
 <?php
-namespace Pruiti\AmazonMWS;
+namespace SalvatorePruiti\AmazonMWS;
 
 use Exception;
 

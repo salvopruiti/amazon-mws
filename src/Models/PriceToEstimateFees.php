@@ -1,5 +1,5 @@
 <?php 
-namespace Pruiti\AmazonMWS\Models;
+namespace SalvatorePruiti\AmazonMWS\Models;
 
 class PriceToEstimateFees {
 

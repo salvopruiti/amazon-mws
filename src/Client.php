@@ -1,12 +1,12 @@
 <?php
-namespace Pruiti\AmazonMWS;
+namespace SalvatorePruiti\AmazonMWS;
 
 use DateTime;
 use Exception;
 use League\Csv\Reader;
 use League\Csv\Writer;
-use Pruiti\AmazonMWS\Models\FeesEstimateRequestElement;
-use Pruiti\AmazonMWS\Models\Product;
+use SalvatorePruiti\AmazonMWS\Models\FeesEstimateRequestElement;
+use SalvatorePruiti\AmazonMWS\Models\Product;
 use SplTempFileObject;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\BadResponseException;
